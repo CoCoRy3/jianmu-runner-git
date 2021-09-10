@@ -4,15 +4,14 @@ set -e
 GIT_PROJECT=`basename "${JIANMU_REMOTE_URL}" .git`
 TAGBRANCH=""
 
-if [[ -z "${JIANMU_NETRC_MACHINE}" ]]; then
-  echo "[ERROR] The git machine configuration is missing"
-  exit 1
-fi
-
 if [[ -z "${JIANMU_REMOTE_URL}" ]]
 then
   echo "[ERROR] The necessary git source configuration is missing"
   exit 1
+fi
+
+if [[ -z "${JIANMU_NETRC_MACHINE}" ]]; then
+  echo "[WARN] The git machine configuration is missing"
 fi
 
 if [[ -n "${JIANMU_NETRC_USERNAME}" && -n "${JIANMU_NETRC_PASSWORD}" ]]
