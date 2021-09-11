@@ -70,6 +70,6 @@ git branch
 echo "resultFile:"
 mkdir -p /usr/${GIT_PROJECT}
 echo -e "{\n"\"git_path\"" ":" "\"${JIANMU_SHARE_DIR}/${GIT_PROJECT}\""","\n"\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""\n"}"" > resultFile
-mv resultFile /usr/${GIT_PROJECT}
+mv resultFile /usr
 
-cat /usr/${GIT_PROJECT}/resultFile
+cat /usr/resultFile

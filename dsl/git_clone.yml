@@ -5,17 +5,17 @@ inputParameters:
   - name: 用户名
     ref: netrc_username
     type: SECRET
-    value:
+    value: xxx
     description: git平台的账号
   - name: 密码
     ref: netrc_password
     type: SECRET
-    value:
+    value: xxx
     description: git平台的密码
   - name: ssh私钥
     ref: ssh_key
     type: SECRET
-    value:
+    value: xxx
     description: 平台中设置的ssh公钥对应的私钥(id_rsa)
   - name: git地址
     ref: remote_url
@@ -25,7 +25,7 @@ inputParameters:
   - name: git引擎
     ref: netrc_machine
     type: STRING
-    value:
+    value: xxx
     description: gitee.com,github.com,gitlab.com等等
   - name: 标签或分支
     ref: ref
