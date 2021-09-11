@@ -51,11 +51,6 @@ jianmu-runner-git-clone:1.0.0
     description: 需要git的标签或者分支,如果是branch则格式为："/refs/heads/master",
     			 如果是tag则格式为："/refs/tags/1.0.0"
     						 
-  - name: git clone目录
-    ref: share_dir
-    type: STRING
-    value: /tmp
-    description: 在哪个目录进行git clone操作,配置后会将的项目会直接clone到此处
   ```
 
 - 输出参数
