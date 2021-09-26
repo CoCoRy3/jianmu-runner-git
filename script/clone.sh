@@ -40,10 +40,10 @@ else
   echo "[WARN] The SSH configuration is missing,try use username,password"
 fi
 
-if [ ! -d ${JIANMU_SHARE_DIR} ]; then
-    mkdir -p ${JIANMU_SHARE_DIR}
+if [ ! -d ${JM_SHARE_DIR} ]; then
+    mkdir -p ${JM_SHARE_DIR}
 fi
-cd ${JIANMU_SHARE_DIR}
+cd ${JM_SHARE_DIR}
 git clone ${JIANMU_REMOTE_URL}
 cd "${GIT_PROJECT}"
 
@@ -69,7 +69,7 @@ git branch
 
 echo "resultFile:"
 mkdir -p /usr/${GIT_PROJECT}
-echo -e "{\n"\"git_path\"" ":" "\"${JIANMU_SHARE_DIR}/${GIT_PROJECT}\""","\n"\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""\n"}"" > resultFile
+echo -e "{\n"\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","\n"\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""\n"}"" > resultFile
 mv resultFile /usr
 
 cat /usr/resultFile
