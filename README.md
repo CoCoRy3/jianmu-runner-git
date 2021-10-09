@@ -4,9 +4,13 @@
 
 用于向指定的git引擎clone项目
 
+**构建：**
+
+`docker build -t jianmudev/jianmu-runner-git-clone:tags  -f dockerfile/Dockerfile .`
+
 **版本：**
 
-jianmu-runner-git-clone:1.0.0
+jianmu-runner-git-clone:1.0.1
 
 **参数：**
 
