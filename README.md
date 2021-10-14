@@ -15,6 +15,14 @@ netrc_machine: git引擎
 ref: 标签或分支
 ```
 
+#### 输出参数
+
+```
+ git_path: git clone目录
+ git_branch: 如果选择git分支，返回分支名
+ git_tag: 如果选择某个标签，返回标签
+```
+
 #### 构建docker镜像
 
 ```
