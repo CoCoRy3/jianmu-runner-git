@@ -21,6 +21,7 @@ ref: 标签或分支
  git_path: git clone目录
  git_branch: 如果选择git分支，返回分支名
  git_tag: 如果选择某个标签，返回标签
+ commit_id: 将当前版本的commit id返回
 ```
 
 #### 构建docker镜像
