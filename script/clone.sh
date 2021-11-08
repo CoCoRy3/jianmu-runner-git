@@ -67,9 +67,19 @@ fi
 # echo current branch or tag
 git branch
 
+# echo commit id
+echo "commit id: `git rev-parse HEAD`"
+
 echo "resultFile:"
 mkdir -p /usr/${GIT_PROJECT}
-echo -e "{\n"\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","\n"\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""\n"}"" > resultFile
+echo -e "
+          {\n
+          "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","\n
+          "\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""\n
+          "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""\n
+          "}"
+
+          " > resultFile
 mv resultFile /usr
 
 cat /usr/resultFile
