@@ -48,5 +48,10 @@ outputParameters:
     type: STRING
     value: ""
     description: 如果选择某个标签,则会将此标签返回,如：1.0.0,git_tag参数和git_branch参数只会返回一个
+  - ref: commit_id
+    name: commit id
+    type: STRING
+    value: ""
+    description: 将当前版本的commit id返回
 spec:
-  image: 'jianmudev/jianmu-runner-git-clone:1.0.1'
+  image: 'jianmudev/jianmu-runner-git-clone:1.1.0'
