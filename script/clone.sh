@@ -72,13 +72,11 @@ echo "commit id: `git rev-parse HEAD`"
 
 echo "resultFile:"
 mkdir -p /usr/${GIT_PROJECT}
-echo -e "
-{\n
-     "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","\n
-     "\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""","\n
-     "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""\n
-}
-         " > resultFile
+echo -e "{
+     "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+     "\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""","
+     "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+}" > resultFile
 mv resultFile /usr
 
 cat /usr/resultFile
