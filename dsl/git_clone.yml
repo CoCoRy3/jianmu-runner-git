@@ -7,7 +7,7 @@ inputParameters:
     type: SECRET
     value: ""
     description: git平台的账号
-    require: false
+    required: false
   - name: 密码
     ref: netrc_password
     type: SECRET
