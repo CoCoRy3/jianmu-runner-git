@@ -1,0 +1,57 @@
+ref: git_push
+version: 1.0.0
+inputParameters:
+  - name: 用户名
+    ref: netrc_username
+    type: SECRET
+    value: ""
+    description: git平台的账号
+    required: false
+  - name: 密码
+    ref: netrc_password
+    type: SECRET
+    value: ""
+    description: git平台的密码
+    required: false
+  - name: ssh私钥
+    ref: ssh_key
+    type: SECRET
+    value: ""
+    description: 平台中设置的ssh公钥对应的私钥(id_rsa)
+    required: false
+  - name: git地址
+    ref: remote_url
+    type: STRING
+    description: 配置远程的git源,将文件push到这个url上,使用账号密码的方式的url"https://gitee.com/jianmu_dev/jianmu-ci-ui.git"或者使用ssh的方式的url"git@gitee.com:jianmu_dev/jianmu-ci-ui.git"
+    required: true
+  - name: git引擎
+    ref: netrc_machine
+    type: STRING
+    value: ""
+    description: gitee.com,github.com,gitlab.com等等
+    required: false
+  - name: 分支
+    ref: remote_branch
+    type: STRING
+    value: master
+    description: 需要push到的分支的分支名
+    required: false
+  - name: 源文件路径
+    ref: source_path
+    type: STRING
+    description: 指定本地需push文件的路径，含文件和目录
+    required: true
+  - name: 目标目录
+    ref: target_dir
+    type: STRING
+    description: 将源文件拷贝到的目录，此参数必须为目录，不能为文件，若此参数指定的目录不存在时，自动创建目录
+    required: true
+  - name: 提交信息
+    ref: commit_message
+    type: STRING
+    description: git提交信息
+    value: "jianmu default commit message"
+    required: false
+spec:
+  image: 'jianmudev/jianmu-runner-git-push:1.0.0'
+  cmd: '/usr/local/bin/push.sh'

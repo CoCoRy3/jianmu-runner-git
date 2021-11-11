@@ -55,3 +55,4 @@ outputParameters:
     description: 将当前版本的commit id返回
 spec:
   image: 'jianmudev/jianmu-runner-git-clone:1.1.0'
+  cme: '/usr/local/bin/clone.sh'
