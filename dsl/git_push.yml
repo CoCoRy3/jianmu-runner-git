@@ -53,5 +53,5 @@ inputParameters:
     value: "jianmu default commit message"
     required: false
 spec:
-  image: 'jianmudev/jianmu-runner-git-push:1.0.0'
+  image: 'jianmudev/jianmu-runner-git:1.0.0'
   cmd: '/usr/local/bin/push.sh'
