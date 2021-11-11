@@ -23,7 +23,6 @@ inputParameters:
   - name: git地址
     ref: remote_url
     type: STRING
-    value: ""
     description: 配置远程的git源,即从哪个url上clone项目,使用账号密码的方式的url"https://gitee.com/jianmu_dev/jianmu-ci-ui.git"或者使用ssh的方式的url"git@gitee.com:jianmu_dev/jianmu-ci-ui.git"
     required: true
   - name: git引擎
