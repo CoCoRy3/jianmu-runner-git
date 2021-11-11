@@ -1,5 +1,5 @@
 ref: git_clone
-version: 1.1.0
+version: 1.1.1
 resultFile: /usr/resultFile
 inputParameters:
   - name: 用户名
@@ -7,31 +7,37 @@ inputParameters:
     type: SECRET
     value: ""
     description: git平台的账号
+    require: false
   - name: 密码
     ref: netrc_password
     type: SECRET
     value: ""
     description: git平台的密码
+    required: false
   - name: ssh私钥
     ref: ssh_key
     type: SECRET
     value: ""
     description: 平台中设置的ssh公钥对应的私钥(id_rsa)
+    required: false
   - name: git地址
     ref: remote_url
     type: STRING
     value: ""
     description: 配置远程的git源,即从哪个url上clone项目,使用账号密码的方式的url"https://gitee.com/jianmu_dev/jianmu-ci-ui.git"或者使用ssh的方式的url"git@gitee.com:jianmu_dev/jianmu-ci-ui.git"
+    required: true
   - name: git引擎
     ref: netrc_machine
     type: STRING
     value: ""
     description: gitee.com,github.com,gitlab.com等等
+    required: false
   - name: 标签或分支
     ref: ref
     type: STRING
     value: refs/heads/master
     description: 需要git的标签或者分支,如果是branch则格式为："/refs/heads/master",如果是tag则格式为："/refs/tags/1.0.0"
+    required: false
 outputParameters:
   - ref: git_path
     name: git clone目录
