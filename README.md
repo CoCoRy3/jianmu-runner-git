@@ -4,7 +4,7 @@
 
 #### 介绍
 
-用于向指定的git引擎clone项目
+用于向指定的git仓库clone项目
 
 ####  输入参数
 
@@ -30,10 +30,10 @@ ref: 标签或分支
 
 ```
 # 创建docker镜像
-docker build -t jianmudev/jianmu-runner-git-clone:${version} -f dockerfile/Dockerfile .
+docker build -t jianmudev/jianmu-runner-git:${version} -f dockerfile/Dockerfile .
 
 # 上传docker镜像
-docker push jianmudev/jianmu-runner-git-clone:${version}
+docker push jianmudev/jianmu-runner-git:${version}
 ```
 
 #### 用法
@@ -63,7 +63,7 @@ docker run --rm \
 
 #### 介绍
 
-用于向指定的git引擎push项目
+用于向指定的git仓库push项目
 
 ####  输入参数
 
