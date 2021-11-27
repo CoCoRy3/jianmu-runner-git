@@ -43,7 +43,7 @@ if [ ! -d ${JM_SHARE_DIR} ]; then
     mkdir -p ${JM_SHARE_DIR}
 fi
 cd ${JM_SHARE_DIR}
-mkdir -p /usr/${GIT_PROJECT}
+mkdir -p ${GIT_PROJECT}
 cd ${GIT_PROJECT}
 
 git_init() {
