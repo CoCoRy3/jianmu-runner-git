@@ -68,10 +68,8 @@ git_branch() {
   else
     # not exist commit id
     git_init
-    git fetch origin ${JIANMU_REF}
-    git checkout FETCH_HEAD
-    COMMIT_ID=`git rev-parse HEAD`
-    git checkout ${COMMIT_ID} -b ${CHECKOUT_BRANCH}
+    git fetch --depth=1 origin ${JIANMU_REF}
+    git checkout -b ${CHECKOUT_BRANCH}
   fi
 }
 
