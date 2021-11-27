@@ -47,6 +47,8 @@ cd ${JM_SHARE_DIR}
 git_init() {
   git init
   git remote add origin ${JIANMU_REMOTE_URL}
+  git config --global user.email "jianmu@example.com"
+  git config --global user.name "jianmu clone"
 }
 
 git_tag() {
