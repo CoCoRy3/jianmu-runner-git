@@ -43,6 +43,8 @@ if [ ! -d ${JM_SHARE_DIR} ]; then
     mkdir -p ${JM_SHARE_DIR}
 fi
 cd ${JM_SHARE_DIR}
+mkdir -p /usr/${GIT_PROJECT}
+cd ${GIT_PROJECT}
 
 git_init() {
   git init
@@ -77,19 +79,13 @@ git_pr() {
   if [[ -n "${JIANMU_PR_COMMIT_ID}" ]]; then
     # exist pr commit id
     git_init
-    git fetch --depth=1 origin refs/heads/${JIANMU_PR_COMMIT_BRANCH}
-    git checkout ${JIANMU_PR_COMMIT_BRANCH}
     git fetch origin ${JIANMU_REF}
-    git merge ${JIANMU_PR_COMMIT_ID}
+    git checkout ${JIANMU_PR_COMMIT_ID}
   else
     # not exist pr commit id
     git_init
-    git fetch --depth=1 origin refs/heads/${JIANMU_PR_COMMIT_BRANCH}
-    git checkout ${JIANMU_PR_COMMIT_BRANCH}
-    git fetch origin ${JIANMU_REF}
+    git fetch --depth=1 origin ${JIANMU_REF}
     git checkout FETCH_HEAD
-    PR_COMMIT_ID=`git rev-parse HEAD`
-    git merge ${PR_COMMIT_ID}
   fi
 }
 
@@ -104,7 +100,6 @@ echo "git log: "
 git log
 
 echo "resultFile:"
-mkdir -p /usr/${GIT_PROJECT}
 echo -e "{
      "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
      "\"git_ref\"" ":" "\"${JIANMU_REF}\""","
