@@ -2,7 +2,6 @@
 set -e
 
 GIT_PROJECT=`basename "${JIANMU_REMOTE_URL}" .git`
-TAGBRANCH=""
 
 if [[ -z "${JIANMU_REMOTE_URL}" ]]
 then
@@ -44,37 +43,71 @@ if [ ! -d ${JM_SHARE_DIR} ]; then
     mkdir -p ${JM_SHARE_DIR}
 fi
 cd ${JM_SHARE_DIR}
-git clone ${JIANMU_REMOTE_URL}
-cd "${GIT_PROJECT}"
 
-#refs/heads/master
-#refs/tags/1.0.0
-#if ${JIANMU_REF} is tag（refs/tags/1.0.0） checkout
-#if ${JIANMU_REF} is branch（refs/heads/master）checkout branch name
-echo ${JIANMU_REF} > ref
-CHECKOUT_REF=`cut ref -d "/" -f 3`
-CHECKOUT_TYPE=`cut ref -d "/" -f 2`
+git_init() {
+  git init
+  git remote add origin ${JIANMU_REMOTE_URL}
+}
 
-if [[ ${CHECKOUT_TYPE} == "heads" ]]; then
-  git checkout ${CHECKOUT_REF}
-  TAGBRANCH="git_branch"
-  echo "current branch:"
-else
-  git checkout ${JIANMU_REF}
-  TAGBRANCH="git_tag"
-  echo "current tags:"
-fi
-# echo current branch or tag
-git branch
+git_tag() {
+  git_init
+  git fetch --depth=1 origin ${JIANMU_REF}
+  git checkout -qf FETCH_HEAD
+}
 
-# echo commit id
-echo "commit id: `git rev-parse HEAD`"
+git_branch() {
+  echo ${JIANMU_REF} > ref
+  CHECKOUT_BRANCH=`cut ref -d "/" -f 3`
+  # exist commit id
+  if [[ -n "${JIANMU_COMMIT_ID}" ]]; then
+    git_init
+    git fetch origin ${JIANMU_REF}
+    git checkout ${JIANMU_COMMIT_ID} -b ${CHECKOUT_BRANCH}
+  else
+    # not exist commit id
+    git_init
+    git fetch origin ${JIANMU_REF}
+    git checkout FETCH_HEAD
+    COMMIT_ID=`git rev-parse HEAD`
+    git checkout ${COMMIT_ID} -b ${CHECKOUT_BRANCH}
+  fi
+}
+
+git_pr() {
+  if [[ -n "${JIANMU_PR_COMMIT_ID}" ]]; then
+    # exist pr commit id
+    git_init
+    git fetch --depth=1 origin refs/heads/master
+    git checkout master
+    git fetch origin pull/37/head:pr_37
+    git merge ${JIANMU_PR_COMMIT_ID}
+  else
+    # not exist pr commit id
+    git_init
+    git fetch --depth=1 origin refs/heads/${JIANMU_PR_COMMIT_BRANCH}
+    git checkout ${JIANMU_PR_COMMIT_BRANCH}
+    git fetch origin ${JIANMU_REF}
+    git checkout FETCH_HEAD
+    PR_COMMIT_ID=`git rev-parse HEAD`
+    git merge ${PR_COMMIT_ID}
+  fi
+}
+
+case $DRONE_COMMIT_REF in
+  refs/tags/*  ) git_tag ;;
+  refs/heads/* ) git_branch ;;
+             * ) git_pr ;;
+esac
+
+# echo git log
+echo "git log: "
+git log
 
 echo "resultFile:"
 mkdir -p /usr/${GIT_PROJECT}
 echo -e "{
      "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
-     "\"${TAGBRANCH}\"" ":" "\"${CHECKOUT_REF}\""","
+     "\"git_ref\"" ":" "\"${JIANMU_REF}\""","
      "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
 }" > resultFile
 mv resultFile /usr
