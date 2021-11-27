@@ -93,7 +93,7 @@ git_pr() {
   fi
 }
 
-case $DRONE_COMMIT_REF in
+case $JIANMU_REF in
   refs/tags/*  ) git_tag ;;
   refs/heads/* ) git_branch ;;
              * ) git_pr ;;
