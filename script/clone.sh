@@ -77,9 +77,9 @@ git_pr() {
   if [[ -n "${JIANMU_PR_COMMIT_ID}" ]]; then
     # exist pr commit id
     git_init
-    git fetch --depth=1 origin refs/heads/master
-    git checkout master
-    git fetch origin pull/37/head:pr_37
+    git fetch --depth=1 origin refs/heads/${JIANMU_PR_COMMIT_BRANCH}
+    git checkout ${JIANMU_PR_COMMIT_BRANCH}
+    git fetch origin ${JIANMU_REF}
     git merge ${JIANMU_PR_COMMIT_ID}
   else
     # not exist pr commit id
