@@ -38,19 +38,12 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
   echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
   IP=`cut /tmp/machine -d ":" -f 1`
   PORT=`cut /tmp/machine -d ":" -f 2`
-  echo "zc"
   FLAG=`cut /tmp/machine -d ":" -f 3`
-  echo ${FLAG}
-  echo "zc2"
   # compatible with non-22 ports
   if [[ -z ${FLAG} ]];then
-    echo "zc3"
     ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
-    echo "zc4"
   else
-    echo "zc5"
 	  ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
-	  echo "zc6"
   fi
 else
   echo "[WARN] The SSH configuration is missing,try use username,password"
