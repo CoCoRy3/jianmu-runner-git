@@ -36,8 +36,8 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
 	chmod 600 ${HOME}/.ssh/known_hosts
 
  # Compatible with non-22 ports
-  result=$(echo ${JIANMU_NETRC_MACHINE} | grep ":")
-  if [[ "$result" != "" ]];then
+  RESULT=`echo ${JIANMU_NETRC_MACHINE} | grep ":"`
+  if [[ ${RESULT} != "" ]];then
     echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
     PORT=`cut /tmp/machine -d ":" -f 2`
     ssh-keyscan -H -p ${PORT} ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
