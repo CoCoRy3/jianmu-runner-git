@@ -21,7 +21,7 @@ then
   fi
 
   NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}' | awk -F ":" '{print $1}'`
-  echo ${NETRC_MACHINE}
+  echo "machine: ${NETRC_MACHINE}"
 
   mkdir -p ${HOME}
   	cat <<EOF > ${HOME}/.netrc
