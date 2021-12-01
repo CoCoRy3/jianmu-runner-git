@@ -40,7 +40,8 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
   if [[ ${RESULT} != "" ]];then
     echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
     PORT=`cut /tmp/machine -d ":" -f 2`
-    ssh-keyscan -H -p ${PORT} ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
+    IP=`cut /tmp/machine -d ":" -f 1`
+    ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
   else
 	ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
   fi
