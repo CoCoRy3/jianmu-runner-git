@@ -35,11 +35,12 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
   touch ${HOME}/.ssh/known_hosts
 	chmod 600 ${HOME}/.ssh/known_hosts
 
- # compatible with non-22 ports
-  if [[ ${JIANMU_NETRC_MACHINE} =~ ":" ]];then
-    echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
-    PORT=`cut /tmp/machine -d ":" -f 2`
-    IP=`cut /tmp/machine -d ":" -f 1`
+  echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
+  IP=`cut /tmp/machine -d ":" -f 1`
+  PORT=`cut /tmp/machine -d ":" -f 2`
+  FLAG=`cut /tmp/machine -d ":" -f 3`
+  # compatible with non-22 ports
+  if [[ ${FLAG} = "" ]];then
     ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
   else
 	  ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
