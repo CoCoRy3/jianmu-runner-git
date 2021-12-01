@@ -3,13 +3,13 @@ version: 1.2.0
 resultFile: /usr/resultFile
 inputParameters:
   - name: 用户名
-    ref: netrc_username
+    ref: username
     type: SECRET
     value: ""
     description: git平台的账号
     required: false
   - name: 密码
-    ref: netrc_password
+    ref: password
     type: SECRET
     value: ""
     description: git平台的密码
@@ -36,12 +36,6 @@ inputParameters:
     type: STRING
     value: ""
     description: 在ref为分支或pr的模式下，可以指定commit id，更精确的clone项目
-    required: false
-  - name: pr分支
-    ref: pr_commit_branch
-    type: STRING
-    value: master
-    description: 在ref为pr的模式下，可以指定pr的目标分支
     required: false
 outputParameters:
   - ref: git_path
