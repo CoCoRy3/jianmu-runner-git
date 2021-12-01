@@ -9,15 +9,13 @@ then
   exit 1
 fi
 
-if [[ -z "${JIANMU_NETRC_MACHINE}" ]]; then
-  echo "[WARN] The git machine configuration is missing"
-fi
-
 if [[ -n "${JIANMU_NETRC_USERNAME}" && -n "${JIANMU_NETRC_PASSWORD}" ]]
 then
+  NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'`
+
   mkdir -p ${HOME}
   	cat <<EOF > ${HOME}/.netrc
-  machine ${JIANMU_NETRC_MACHINE}
+  machine ${NETRC_MACHINE}
   login ${JIANMU_NETRC_USERNAME}
   password ${JIANMU_NETRC_PASSWORD}
 EOF
@@ -34,16 +32,17 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
 
   touch ${HOME}/.ssh/known_hosts
 	chmod 600 ${HOME}/.ssh/known_hosts
-
-  echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
-  IP=`cut /tmp/machine -d ":" -f 1`
-  PORT=`cut /tmp/machine -d ":" -f 2`
-  FLAG=`cut /tmp/machine -d ":" -f 3`
-  # compatible with non-22 ports
-  if [[ -z ${FLAG} ]];then
-    ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
+	
+  HAS_PORT=`echo ${JIANMU_REMOTE_URL} | awk -F ":" '{print $1}'`
+  if [ ${HAS_PORT} == "ssh" ]; then
+      NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "@" '{print $2}' | awk -F "/" '{print $1}'`
+      echo ${NETRC_MACHINE} > /tmp/machine
+      IP=`cut /tmp/machine -d ":" -f 1`
+      PORT=`cut /tmp/machine -d ":" -f 2`
+      ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
   else
-	  ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
+      NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "@" '{print $2}' | awk -F ":" '{print $1}'`
+      ssh-keyscan -H ${NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
   fi
 else
   echo "[WARN] The SSH configuration is missing,try use username,password"
