@@ -1,5 +1,5 @@
 ref: git_clone
-version: 1.1.1
+version: 1.2.0
 resultFile: /usr/resultFile
 inputParameters:
   - name: 用户名
@@ -25,17 +25,23 @@ inputParameters:
     type: STRING
     description: 配置远程的git源,即从哪个url上clone项目,使用账号密码的方式的url"https://gitee.com/jianmu_dev/jianmu-ci-ui.git"或者使用ssh的方式的url"git@gitee.com:jianmu_dev/jianmu-ci-ui.git"
     required: true
-  - name: git引擎
-    ref: netrc_machine
-    type: STRING
-    value: ""
-    description: gitee.com,github.com,gitlab.com等等
-    required: false
   - name: 标签或分支
     ref: ref
     type: STRING
     value: refs/heads/master
-    description: 需要git的标签或者分支,如果是branch则格式为："/refs/heads/master",如果是tag则格式为："/refs/tags/1.0.0"
+    description: 需要git的标签，分支或pr标签,如果是branch则格式为："/refs/heads/master"； 如果是tag则格式为："/refs/tags/1.0.0"； 若选择pr标签模式请参考各个平台的标准,参考：gitee为pull/1/head:pr_1，github为pull/1/head:pr1，gitlab为refs/merge-requests/1/head，coding为refs/merge/1/HEAD
+    required: false
+  - name: 提交id
+    ref: commit_id
+    type: STRING
+    value: ""
+    description: 在ref为分支或pr的模式下，可以指定commit id，更精确的clone项目
+    required: false
+  - name: pr分支
+    ref: pr_commit_branch
+    type: STRING
+    value: master
+    description: 在ref为pr的模式下，可以指定pr的目标分支
     required: false
 outputParameters:
   - ref: git_path
@@ -61,5 +67,5 @@ outputParameters:
     description: 将当前版本的commit id返回
     required: true
 spec:
-  image: 'jianmudev/jianmu-runner-git:1.0.0'
+  image: 'huangxi1020/jianmu-runner-git:1.2.0'
   cmd: ['/usr/local/bin/clone.sh']

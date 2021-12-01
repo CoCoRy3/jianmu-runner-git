@@ -63,6 +63,8 @@ git_init() {
 }
 
 git_tag() {
+  REF_KEY="git_tag"
+  REF_VALUE=
   git_init
   git fetch --depth=1 origin ${JIANMU_REF}
   git checkout -qf FETCH_HEAD
@@ -85,16 +87,18 @@ git_branch() {
 }
 
 git_pr() {
+  git fetch --depth=1 origin +refs/heads/${JIANMU_PR_COMMIT_BRANCH}:
+  git checkout ${JIANMU_PR_COMMIT_BRANCH}
   if [[ -n "${JIANMU_COMMIT_ID}" ]]; then
     # exist pr commit id
     git_init
     git fetch origin ${JIANMU_REF}
-    git checkout ${JIANMU_COMMIT_ID}
+    git merge ${JIANMU_COMMIT_ID}
   else
     # not exist pr commit id
     git_init
     git fetch --depth=1 origin ${JIANMU_REF}
-    git checkout FETCH_HEAD
+    git merge FETCH_HEAD
   fi
 }
 

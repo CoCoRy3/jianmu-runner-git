@@ -13,16 +13,16 @@ netrc_username: git平台的账号
 netrc_password: git平台的密码
 ssh_key: ssh私钥
 remote_url: git地址
-netrc_machine: git引擎
-ref: 标签或分支
+ref: 标签, 分支或者pr标签
+commit_id: 提交id
+pr_commit_branch: pr合并到的分支
 ```
 
 #### 输出参数
 
 ```
  git_path: git clone目录
- git_branch: 如果选择git分支，返回分支名
- git_tag: 如果选择某个标签，返回标签
+ git_ref: git关键字
  commit_id: 将当前版本的commit id返回
 ```
 
@@ -44,8 +44,9 @@ docker run --rm \
   -e JIANMU_NETRC_USERNAME=xxx \
   -e JIANMU_NETRC_PASSWORD=xxx \
   -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_NETRC_MACHINE=xxx \
+  -e JIANMU_COMMIT_ID=xxx \
   -e JIANMU_REF=xxx \
+  -e JIANMU_PR_COMMIT_BRANCH=xxx \
   jianmudev/jianmu-runner-git:${version} \
   /usr/local/bin/clone.sh
 
@@ -53,8 +54,9 @@ docker run --rm \
 docker run --rm \
   -e JIANMU_SSH_KEY=xxx \
   -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_NETRC_MACHINE=xxx \
+  -e JIANMU_COMMIT_ID=xxx \
   -e JIANMU_REF=xxx \
+  -e JIANMU_PR_COMMIT_BRANCH=xxx \
   jianmudev/jianmu-runner-git:${version} \
   /usr/local/bin/clone.sh
 ```
