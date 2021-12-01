@@ -96,7 +96,6 @@ git_pr() {
     git merge ${JIANMU_COMMIT_ID}
   else
     # not exist pr commit id
-    git_init
     git fetch --depth=1 origin ${JIANMU_REF}
     git merge FETCH_HEAD
   fi
