@@ -64,22 +64,22 @@ git_init() {
 
 git_tag() {
   REF_KEY="git_tag"
+  echo ${JIANMU_REF} > ref
   REF_VALUE=`cut ref -d "/" -f 3`
   git_init
   git fetch --depth=1 origin ${JIANMU_REF}
   git checkout -qf FETCH_HEAD
 
   echo "resultFile:"
-  echo -e "{
-       "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
-       "\"${REF_KEY}\"" ":" "\"${REF_VALUE}\""","
-       "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-  }" > resultFile
+echo -e "{
+     "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+     "\"${REF_KEY}\"" ":" "\"${REF_VALUE}\""","
+     "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+}" > resultFile
 }
 
 git_branch() {
   REF_KEY="git_branch"
-  REF_VALUE=`cut ref -d "/" -f 3`
   echo ${JIANMU_REF} > ref
   CHECKOUT_BRANCH=`cut ref -d "/" -f 3`
   # exist commit id
@@ -95,11 +95,11 @@ git_branch() {
   fi
 
   echo "resultFile:"
-  echo -e "{
-         "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
-         "\"${REF_KEY}\"" ":" "\"${REF_VALUE}\""","
-         "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-    }" > resultFile
+echo -e "{
+     "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+     "\"${REF_KEY}\"" ":" "\"${CHECKOUT_BRANCH}\""","
+     "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+}" > resultFile
 }
 
 git_pr() {
@@ -115,10 +115,10 @@ git_pr() {
   fi
 
   echo "resultFile:"
-  echo -e "{
-           "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
-           "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-      }" > resultFile
+echo -e "{
+     "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+     "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+}" > resultFile
 }
 
 case ${JIANMU_REF} in
