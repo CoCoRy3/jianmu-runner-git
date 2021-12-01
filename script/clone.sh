@@ -43,7 +43,10 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
     IP=`cut /tmp/machine -d ":" -f 1`
     ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
   else
+  echo "gitee.com"
 	ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
+	cat ${HOME}/.ssh/known_hosts
+	echo "执行完毕"
   fi
 else
   echo "[WARN] The SSH configuration is missing,try use username,password"
