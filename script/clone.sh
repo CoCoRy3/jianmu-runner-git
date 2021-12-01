@@ -43,7 +43,7 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
   echo ${FLAG}
   echo "zc2"
   # compatible with non-22 ports
-  if [[ ${FLAG} = "" ]];then
+  if [[ -z ${FLAG} ]];then
     echo "zc3"
     ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
     echo "zc4"
