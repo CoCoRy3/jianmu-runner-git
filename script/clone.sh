@@ -88,16 +88,14 @@ git_branch() {
 
 git_pr() {
   git_init
-  git fetch --depth=1 origin +refs/heads/${JIANMU_PR_COMMIT_BRANCH}:
-  git checkout ${JIANMU_PR_COMMIT_BRANCH}
   if [[ -n "${JIANMU_COMMIT_ID}" ]]; then
     # exist pr commit id
     git fetch origin ${JIANMU_REF}
-    git merge ${JIANMU_COMMIT_ID}
+    git checkout ${JIANMU_COMMIT_ID}
   else
     # not exist pr commit id
     git fetch --depth=1 origin ${JIANMU_REF}
-    git merge FETCH_HEAD
+    git checkout FETCH_HEAD
   fi
 }
 
