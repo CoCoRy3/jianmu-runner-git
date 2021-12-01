@@ -20,7 +20,7 @@ then
     exit 1
   fi
 
-  NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'` | awk -F ":" '{print $1}'
+  NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}' | awk -F ":" '{print $1}'`
   echo ${NETRC_MACHINE}
 
   mkdir -p ${HOME}
