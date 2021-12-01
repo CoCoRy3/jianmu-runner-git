@@ -28,30 +28,20 @@ fi
 
 
 if [[ -n "${JIANMU_SSH_KEY}" ]]; then
-  echo "1"
-
 	mkdir -p ${HOME}/.ssh
 	echo -n "$JIANMU_SSH_KEY" > ${HOME}/.ssh/id_rsa
 	chmod 600 ${HOME}/.ssh/id_rsa
 
-  echo "2"
-
   touch ${HOME}/.ssh/known_hosts
 	chmod 600 ${HOME}/.ssh/known_hosts
 
-  echo "3"
-
  # compatible with non-22 ports
-  RESULT=`echo ${JIANMU_NETRC_MACHINE} | grep ":"`
-  echo "判断"
-  if [[ ${RESULT} != "" ]];then
-    echo "!="
+  if [[ ${JIANMU_NETRC_MACHINE} =~ ":" ]];then
     echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
     PORT=`cut /tmp/machine -d ":" -f 2`
     IP=`cut /tmp/machine -d ":" -f 1`
     ssh-keyscan -H -p ${PORT} ${IP} > ${HOME}/.ssh/known_hosts 2> /dev/null
   else
-    echo "=="
 	  ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
   fi
 else
