@@ -14,7 +14,7 @@ if [[ -n "${JIANMU_USERNAME}" && -n "${JIANMU_PASSWORD}" ]]
 then
   # check url
   echo ${JIANMU_REMOTE_URL} > url
-  URL_FLAG=`cut ref -d "@" -f 2`
+  URL_FLAG=`cut url -d "@" -f 2`
   if [[ -n ${URL_FLAG} ]]; then
     echo "[ERROR] url configuration error"
     exit 1
@@ -37,7 +37,7 @@ fi
 if [[ -n "${JIANMU_SSH_KEY}" ]]; then
   # check url
    echo ${JIANMU_REMOTE_URL} > url
-    URL_FLAG=`cut ref -d "@" -f 2`
+    URL_FLAG=`cut url -d "@" -f 2`
     if [[ -z ${URL_FLAG} ]]; then
       echo "[ERROR] url configuration error"
       exit 1
