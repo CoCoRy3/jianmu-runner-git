@@ -32,9 +32,18 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
 	echo -n "$JIANMU_SSH_KEY" > ${HOME}/.ssh/id_rsa
 	chmod 600 ${HOME}/.ssh/id_rsa
 
-	touch ${HOME}/.ssh/known_hosts
+  touch ${HOME}/.ssh/known_hosts
 	chmod 600 ${HOME}/.ssh/known_hosts
+
+ # Compatible with non-22 ports
+  result=$(echo ${JIANMU_NETRC_MACHINE} | grep ":")
+  if [[ "$result" != "" ]];then
+    echo ${JIANMU_NETRC_MACHINE} > /tmp/machine
+    PORT=`cut /tmp/machine -d ":" -f 2`
+    ssh-keyscan -H -p ${PORT} ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
+  else
 	ssh-keyscan -H ${JIANMU_NETRC_MACHINE} > ${HOME}/.ssh/known_hosts 2> /dev/null
+  fi
 else
   echo "[WARN] The SSH configuration is missing,try use username,password"
 fi
