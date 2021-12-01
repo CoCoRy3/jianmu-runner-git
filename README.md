@@ -9,12 +9,12 @@
 ####  输入参数
 
 ```
-ref: git关键字
+ref: 标签、分支或pr/mr
 ssh_key: ssh私钥
 commit_id: 提交id
 remote_url: git地址
-netrc_username: git平台的账号
-netrc_password: git平台的密码
+username: git平台的账号
+password: git平台的密码
 ```
 
 #### 输出参数
