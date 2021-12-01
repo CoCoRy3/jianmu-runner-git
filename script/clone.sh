@@ -19,8 +19,8 @@ then
     echo "[ERROR] url configuration error"
     exit 1
   fi
-  
-  NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'`
+
+  NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'` | awk awk -F ":" '{print $1}'
 
   mkdir -p ${HOME}
   	cat <<EOF > ${HOME}/.netrc
