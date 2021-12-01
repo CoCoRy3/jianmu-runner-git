@@ -10,15 +10,15 @@ then
 fi
 
 # write in username password
-if [[ -n "${JIANMU_NETRC_USERNAME}" && -n "${JIANMU_NETRC_PASSWORD}" ]]
+if [[ -n "${JIANMU_USERNAME}" && -n "${JIANMU_PASSWORD}" ]]
 then
   NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'`
 
   mkdir -p ${HOME}
   	cat <<EOF > ${HOME}/.netrc
   machine ${NETRC_MACHINE}
-  login ${JIANMU_NETRC_USERNAME}
-  password ${JIANMU_NETRC_PASSWORD}
+  login ${JIANMU_USERNAME}
+  password ${JIANMU_PASSWORD}
 EOF
   chmod 600 ${HOME}/.netrc
 else
@@ -64,13 +64,22 @@ git_init() {
 
 git_tag() {
   REF_KEY="git_tag"
-  REF_VALUE=
+  REF_VALUE=`cut ref -d "/" -f 3`
   git_init
   git fetch --depth=1 origin ${JIANMU_REF}
   git checkout -qf FETCH_HEAD
+
+  echo "resultFile:"
+  echo -e "{
+       "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+       "\"${REF_KEY}\"" ":" "\"${REF_VALUE}\""","
+       "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+  }" > resultFile
 }
 
 git_branch() {
+  REF_KEY="git_branch"
+  REF_VALUE=`cut ref -d "/" -f 3`
   echo ${JIANMU_REF} > ref
   CHECKOUT_BRANCH=`cut ref -d "/" -f 3`
   # exist commit id
@@ -84,6 +93,13 @@ git_branch() {
     git fetch --depth=1  origin ${JIANMU_REF}
     git checkout FETCH_HEAD
   fi
+
+  echo "resultFile:"
+  echo -e "{
+         "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+         "\"${REF_KEY}\"" ":" "\"${REF_VALUE}\""","
+         "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+    }" > resultFile
 }
 
 git_pr() {
@@ -97,6 +113,12 @@ git_pr() {
     git fetch --depth=1 origin ${JIANMU_REF}
     git checkout FETCH_HEAD
   fi
+
+  echo "resultFile:"
+  echo -e "{
+           "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
+           "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
+      }" > resultFile
 }
 
 case ${JIANMU_REF} in
@@ -105,16 +127,5 @@ case ${JIANMU_REF} in
              * ) git_pr ;;
 esac
 
-# echo git log
-echo "git log: "
-git log
-
-echo "resultFile:"
-echo -e "{
-     "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
-     "\"git_ref\"" ":" "\"${JIANMU_REF}\""","
-     "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-}" > resultFile
 mv resultFile /usr
-
 cat /usr/resultFile
