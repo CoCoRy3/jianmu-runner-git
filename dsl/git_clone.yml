@@ -61,5 +61,5 @@ outputParameters:
     description: 将当前版本的commit id返回
     required: true
 spec:
-  image: 'huangxi1020/jianmu-runner-git:1.2.0'
+  image: 'jianmudev/jianmu-runner-git:1.2.0'
   cmd: ['/usr/local/bin/clone.sh']
