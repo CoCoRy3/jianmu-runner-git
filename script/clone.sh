@@ -15,7 +15,7 @@ then
   # check url
   echo ${JIANMU_REMOTE_URL} > url
   URL_FLAG=`cut url -d "@" -f 2`
-  if [[ -n ${URL_FLAG} ]]; then
+  if [[ ${URL_FLAG} != "${JIANMU_REMOTE_URL}" ]]; then
     echo "[ERROR] url configuration error"
     exit 1
   fi
