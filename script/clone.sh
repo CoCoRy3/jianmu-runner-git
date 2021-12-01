@@ -12,6 +12,14 @@ fi
 # write in username password
 if [[ -n "${JIANMU_USERNAME}" && -n "${JIANMU_PASSWORD}" ]]
 then
+  # check url
+  echo ${JIANMU_REMOTE_URL} > url
+  URL_FLAG=`cut ref -d "@" -f 2`
+  if [[ -n ${URL_FLAG} ]]; then
+    echo "[ERROR] url configuration error"
+    exit 1
+  fi
+  
   NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'`
 
   mkdir -p ${HOME}
@@ -27,6 +35,14 @@ fi
 
 # write in ssh key
 if [[ -n "${JIANMU_SSH_KEY}" ]]; then
+  # check url
+   echo ${JIANMU_REMOTE_URL} > url
+    URL_FLAG=`cut ref -d "@" -f 2`
+    if [[ -z ${URL_FLAG} ]]; then
+      echo "[ERROR] url configuration error"
+      exit 1
+    fi
+
 	mkdir -p ${HOME}/.ssh
 	echo -n "$JIANMU_SSH_KEY" > ${HOME}/.ssh/id_rsa
 	chmod 600 ${HOME}/.ssh/id_rsa
