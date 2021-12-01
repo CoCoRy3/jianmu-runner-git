@@ -23,7 +23,7 @@ inputParameters:
   - name: git地址
     ref: remote_url
     type: STRING
-    description: 配置远程的git源,即从哪个url上clone项目,使用账号密码的方式的url"https://gitee.com/jianmu_dev/jianmu-ci-server.git"或者使用ssh的方式的url"git@gitee.com:jianmu_dev/jianmu-ci-server.git"
+    description: 配置远程的git源,即从哪个url上clone项目,使用账号密码的方式的url"https://gitee.com/jianmu-dev/jianmu-ci-server.git"或者使用ssh方式的url为"git@gitee.com:jianmu-dev/jianmu-ci-server.git"，若ssh端口为非默认的22时为"ssh://git@gitee.com:xxx/jianmu-dev/jianmu-ci-server.git"，其中xxx为ssh端口
     required: true
   - name: 标签、分支或pr/mr
     ref: ref
