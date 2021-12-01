@@ -9,6 +9,7 @@ then
   exit 1
 fi
 
+# write in username password
 if [[ -n "${JIANMU_NETRC_USERNAME}" && -n "${JIANMU_NETRC_PASSWORD}" ]]
 then
   NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "//" '{print $2}' | awk -F "/" '{print $1}'`
@@ -24,7 +25,7 @@ else
   echo "[WARN] The username or password configuration is missing,try use ssh"
 fi
 
-
+# write in ssh key
 if [[ -n "${JIANMU_SSH_KEY}" ]]; then
 	mkdir -p ${HOME}/.ssh
 	echo -n "$JIANMU_SSH_KEY" > ${HOME}/.ssh/id_rsa
@@ -32,7 +33,8 @@ if [[ -n "${JIANMU_SSH_KEY}" ]]; then
 
   touch ${HOME}/.ssh/known_hosts
 	chmod 600 ${HOME}/.ssh/known_hosts
-	
+
+	# compatible default port is not 22
   HAS_PORT=`echo ${JIANMU_REMOTE_URL} | awk -F ":" '{print $1}'`
   if [ ${HAS_PORT} == "ssh" ]; then
       NETRC_MACHINE=`echo ${JIANMU_REMOTE_URL} | awk -F "@" '{print $2}' | awk -F "/" '{print $1}'`
@@ -83,11 +85,11 @@ git_branch() {
 }
 
 git_pr() {
-  if [[ -n "${JIANMU_PR_COMMIT_ID}" ]]; then
+  if [[ -n "${JIANMU_COMMIT_ID}" ]]; then
     # exist pr commit id
     git_init
     git fetch origin ${JIANMU_REF}
-    git checkout ${JIANMU_PR_COMMIT_ID}
+    git checkout ${JIANMU_COMMIT_ID}
   else
     # not exist pr commit id
     git_init
