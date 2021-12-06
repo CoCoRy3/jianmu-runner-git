@@ -1,14 +1,15 @@
 ref: git_push
 version: 1.0.0
+description: 该版本参数配置：输入参数中删除git引擎配置。用户名、密码，参数名由netrc_username、netrc_password更改为username、password。
 inputParameters:
   - name: 用户名
-    ref: netrc_username
+    ref: username
     type: SECRET
     value: ""
     description: git平台的账号
     required: false
   - name: 密码
-    ref: netrc_password
+    ref: password
     type: SECRET
     value: ""
     description: git平台的密码
@@ -24,12 +25,6 @@ inputParameters:
     type: STRING
     description: 配置远程的git源,将文件push到这个url上,使用账号密码的方式的url"https://gitee.com/jianmu_dev/jianmu-ci-ui.git"或者使用ssh的方式的url"git@gitee.com:jianmu_dev/jianmu-ci-ui.git"
     required: true
-  - name: git引擎
-    ref: netrc_machine
-    type: STRING
-    value: ""
-    description: gitee.com,github.com,gitlab.com等等
-    required: false
   - name: 分支
     ref: remote_branch
     type: STRING
@@ -53,5 +48,5 @@ inputParameters:
     value: "jianmu default commit message"
     required: false
 spec:
-    image: 'jianmudev/jianmu-runner-git:1.0.0'
-    cmd: ['/usr/local/bin/push.sh']
+  image: 'huangxi1020/jianmu-runner-git:1.0.0'
+  cmd: ['/usr/local/bin/push.sh']

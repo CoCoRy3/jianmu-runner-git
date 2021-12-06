@@ -68,11 +68,10 @@ docker run --rm \
 ####  输入参数
 
 ```
-netrc_username: git平台的账号
-netrc_password: git平台的密码
+username: git平台的账号
+password: git平台的密码
 ssh_key: ssh私钥
 remote_url: git地址
-netrc_machine: git引擎
 remote_branch: 分支
 source_path: 源文件路径
 target_dir: 目标目录
@@ -94,10 +93,9 @@ docker push jianmudev/jianmu-runner-git:${version}
 ```
 # use username password
 docker run --rm \
-  -e JIANMU_NETRC_USERNAME=xxx \
-  -e JIANMU_NETRC_PASSWORD=xxx \
+  -e JIANMU_USERNAME=xxx \
+  -e JIANMU_PASSWORD=xxx \
   -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_NETRC_MACHINE=xxx \
   -e JIANMU_REMOTE_BRANCH=xxx \
   -e JIANMU_SOURCE_PATH=xxx \
   -e JIANMU_TARGET_DIR=xxx \
@@ -109,7 +107,6 @@ docker run --rm \
 docker run --rm \
   -e JIANMU_SSH_KEY=xxx \
   -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_NETRC_MACHINE=xxx \
   -e JIANMU_REMOTE_BRANCH=xxx \
   -e JIANMU_SOURCE_PATH=xxx \
   -e JIANMU_TARGET_DIR=xxx \

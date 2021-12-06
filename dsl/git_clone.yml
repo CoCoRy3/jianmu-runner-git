@@ -1,6 +1,7 @@
 ref: git_clone
 version: 1.2.0
 resultFile: /usr/resultFile
+description: 该版本参数配置：输入参数中删除git引擎配置。用户名、密码，参数名由netrc_username、netrc_password更改为username、password。ref参数现在可配置pr/mr标签。新增提交id的参数配置。
 inputParameters:
   - name: 用户名
     ref: username
