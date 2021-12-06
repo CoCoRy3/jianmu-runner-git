@@ -1,5 +1,5 @@
 ref: git_push
-version: 1.0.0
+version: 1.0.1
 description: 该版本参数配置：输入参数中删除git引擎配置。用户名、密码，参数名由netrc_username、netrc_password更改为username、password。
 inputParameters:
   - name: 用户名
