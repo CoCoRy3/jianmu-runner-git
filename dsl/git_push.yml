@@ -1,6 +1,6 @@
 ref: git_push
-version: 1.0.1
-description: 该版本参数配置：输入参数中删除git引擎配置。用户名、密码，参数名由netrc_username、netrc_password更改为username、password。
+version: 1.0.2
+description: 该版本实现增量更新文件功能，当source_path中含有和target_dir中同名的文件时会执行更新操作
 inputParameters:
   - name: 用户名
     ref: username

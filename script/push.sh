@@ -102,7 +102,7 @@ git_push() {
 # source_path is a directory
 if [ -d ${JIANMU_SOURCE_PATH} ]; then
     # cp source file
-    cp -r ${JIANMU_SOURCE_PATH}/* ${JIANMU_TARGET_DIR}
+    echo y | cp -r ${JIANMU_SOURCE_PATH}/* ${JIANMU_TARGET_DIR}
 
     git_push
 fi
@@ -110,7 +110,7 @@ fi
 # source_path is a file
 if [ -f ${JIANMU_SOURCE_PATH} ]; then
     # cp source file
-    cp ${JIANMU_SOURCE_PATH} ${JIANMU_TARGET_DIR}
+    echo y | cp ${JIANMU_SOURCE_PATH} ${JIANMU_TARGET_DIR}
 
     git_push
 fi
