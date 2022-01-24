@@ -94,7 +94,7 @@ git_push() {
     git config --global user.name "jianmu push"
     git add .
 
-    git commit -m "${JIANMU_COMMIT_MESSAGE}"
+    echo `git commit -m "${JIANMU_COMMIT_MESSAGE}"`
     git push ${JIANMU_REMOTE_URL} ${JIANMU_REMOTE_BRANCH}
     exit 0
 }
