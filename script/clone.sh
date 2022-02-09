@@ -81,8 +81,8 @@ git_init() {
 
 git_tag() {
   REF_KEY="git_tag"
-  echo ${JIANMU_REF} > ref
-  REF_VALUE=`cut ref -d "/" -f 3`
+  echo ${JIANMU_REF} > /tmp/ref
+  REF_VALUE=`cut /tmp/ref -d "/" -f 3`
   git_init
   git fetch --depth=1 origin ${JIANMU_REF}
   git checkout -qf FETCH_HEAD
@@ -97,8 +97,8 @@ echo -e "{
 
 git_branch() {
   REF_KEY="git_branch"
-  echo ${JIANMU_REF} > ref
-  CHECKOUT_BRANCH=`cut ref -d "/" -f 3`
+  echo ${JIANMU_REF} > /tmp/ref
+  CHECKOUT_BRANCH=`cut /tmp/ref -d "/" -f 3`
   # exist commit id
   if [[ -n "${JIANMU_COMMIT_ID}" ]]; then
     git_init
