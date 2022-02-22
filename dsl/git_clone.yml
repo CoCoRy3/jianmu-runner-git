@@ -61,5 +61,5 @@ outputParameters:
     description: 返回当前提交id
     required: true
 spec:
-  image: jianmurunner/git_clone:1.2.1
+  image: jianmurunner/git_clone:2.0.0-k8s
   cmd: ['/usr/local/bin/clone.sh']
