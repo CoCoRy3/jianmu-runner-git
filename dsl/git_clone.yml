@@ -1,7 +1,6 @@
 ref: git_clone
-version: 1.2.1
-resultFile: /usr/resultFile
-description: 该版本将ref文件移除git_path，以防止对git_path文件夹进行操作时，出现bug
+version: 2.0.0-k8s
+description: k8s临时分支
 inputParameters:
   - name: 用户名
     ref: username

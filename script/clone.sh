@@ -92,7 +92,7 @@ echo -e "{
      "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
      "\"${REF_KEY}\"" ":" "\"${REF_VALUE}\""","
      "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-}" > resultFile
+}" > ${JM_RESULT_FILE}
 }
 
 git_branch() {
@@ -116,7 +116,7 @@ echo -e "{
      "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
      "\"${REF_KEY}\"" ":" "\"${CHECKOUT_BRANCH}\""","
      "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-}" > resultFile
+}" > ${JM_RESULT_FILE}
 }
 
 git_pr() {
@@ -135,7 +135,7 @@ git_pr() {
 echo -e "{
      "\"git_path\"" ":" "\"${JM_SHARE_DIR}/${GIT_PROJECT}\""","
      "\"commit_id\"" ":" "\"`git rev-parse HEAD`\""
-}" > resultFile
+}" > ${JM_RESULT_FILE}
 }
 
 case ${JIANMU_REF} in
@@ -144,5 +144,5 @@ case ${JIANMU_REF} in
              * ) git_pr ;;
 esac
 
-mv resultFile /usr
-cat /usr/resultFile
+# mv resultFile /usr
+cat ${JM_RESULT_FILE}
