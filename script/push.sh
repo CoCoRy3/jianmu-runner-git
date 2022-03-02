@@ -90,8 +90,8 @@ fi
 
 git_push() {
     # git push
-    git config --global user.email "jianmu@example.com"
-    git config --global user.name "jianmu push"
+    git config --global user.email "${committer_email}"
+    git config --global user.name "${committer_name}"
     git add .
 
     echo `git commit -m "${JIANMU_COMMIT_MESSAGE}"`

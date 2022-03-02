@@ -1,6 +1,6 @@
 ref: git_push
-version: 1.0.2
-description: 该版本新增功能 1. 增量更新文件功能，当source_path中含有和target_dir中同名的文件时会执行更新操作 2. 当流程中文件未改变时，不会异常退出
+version: 1.0.3
+description: 该版本新增配置提交者名，提交者邮箱
 inputParameters:
   - name: 用户名
     ref: username
@@ -47,6 +47,18 @@ inputParameters:
     description: git提交信息
     value: "jianmu default commit message"
     required: false
+  - name: 提交人名
+    ref: committer_name
+    type: STRING
+    description: 提交记录上会显示此提交者名。
+    value: "jianmu"
+    required: false
+  - name: 提交人邮箱
+    ref: committer_email
+    type: STRING
+    description: 提交人的邮箱地址
+    value: "jianmu@example.com"
+    required: false
 spec:
-  image: jianmurunner/git_push:1.0.1
+  image: jianmurunner/git_push:1.0.2
   cmd: ['/usr/local/bin/push.sh']
