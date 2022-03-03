@@ -1,0 +1,19 @@
+ref: git_log
+version: 1.0.0
+resultFile: /tmp/resultFile
+description: 通过git log输出日志
+inputParameters:
+  - name: git地址
+    ref: git_path
+    type: STRING
+    description: 通过git管理的项目地址
+    required: true
+outputParameters:
+  - ref: git_log
+    name: git信息
+    type: STRING
+    description: git提交的日志信息，包含每一次提交的哈希值，作者名字，作者邮箱，提交者名字，提交者邮箱，提交日期，提交信息
+    required: true
+spec:
+  image: jianmurunner/git_log:1.0.0
+  cmd: ['/usr/local/bin/log.sh']

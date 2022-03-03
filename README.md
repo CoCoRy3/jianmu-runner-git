@@ -1,39 +1,31 @@
 # jianmu-runner-git
 
-## git-clone
+## git-log
 
 #### 介绍
 
-用于向指定的git仓库clone项目
+通过git log输出日志
 
 ####  输入参数
 
 ```
-ref: 标签、分支或pr/mr
-ssh_key: ssh私钥
-commit_id: 提交id
-remote_url: git地址
-username: git平台的账号
-password: git平台的密码
+git_path: git地址
 ```
 
 #### 输出参数
 
 ```
- git_path: git clone目录
- git_branch: 如果选择git分支，返回分支名
- git_tag: 如果选择某个标签，返回标签
- commit_id: 将当前版本的commit id返回
+ git_log: git信息
 ```
 
 #### 构建docker镜像
 
 ```
 # 创建docker镜像
-docker build -t jianmudev/jianmu-runner-git:${version} -f dockerfile/Dockerfile .
+docker build -t jianmurunner/git_log:${version} -f dockerfile/Dockerfile .
 
 # 上传docker镜像
-docker push jianmudev/jianmu-runner-git:${version}
+docker push jianmurunner/git_log:${version}
 ```
 
 #### 用法
@@ -41,77 +33,6 @@ docker push jianmudev/jianmu-runner-git:${version}
 ```
 # use username password
 docker run --rm \
-  -e JIANMU_USERNAME=xxx \
-  -e JIANMU_PASSWORD=xxx \
-  -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_COMMIT_ID=xxx \
-  -e JIANMU_REF=xxx \
-  jianmudev/jianmu-runner-git:${version} \
-  /usr/local/bin/clone.sh
-
-# use ssh
-docker run --rm \
-  -e JIANMU_SSH_KEY=xxx \
-  -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_COMMIT_ID=xxx \
-  -e JIANMU_REF=xxx \
-  jianmudev/jianmu-runner-git:${version} \
-  /usr/local/bin/clone.sh
-```
-
-## git-push
-
-#### 介绍
-
-用于向指定的git仓库push项目
-
-####  输入参数
-
-```
-username: git平台的账号
-password: git平台的密码
-ssh_key: ssh私钥
-remote_url: git地址
-remote_branch: 分支
-source_path: 源文件路径
-target_dir: 目标目录
-commit_message: 提交信息
-```
-
-#### 构建docker镜像
-
-```
-# 创建docker镜像
-docker build -t jianmudev/jianmu-runner-git:${vsersion} -f dockerfile/Dockerfile .
-
-# 上传docker镜像
-docker push jianmudev/jianmu-runner-git:${version}
-```
-
-#### 用法
-
-```
-# use username password
-docker run --rm \
-  -e JIANMU_USERNAME=xxx \
-  -e JIANMU_PASSWORD=xxx \
-  -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_REMOTE_BRANCH=xxx \
-  -e JIANMU_SOURCE_PATH=xxx \
-  -e JIANMU_TARGET_DIR=xxx \
-  -e JIANMU_COMMIT_MESSAGE=xxx \
-  jianmudev/jianmu-runner-git:${version} \
-  /usr/local/bin/push.sh
-
-# use ssh
-docker run --rm \
-  -e JIANMU_SSH_KEY=xxx \
-  -e JIANMU_REMOTE_URL=xxx \
-  -e JIANMU_REMOTE_BRANCH=xxx \
-  -e JIANMU_SOURCE_PATH=xxx \
-  -e JIANMU_TARGET_DIR=xxx \
-  -e JIANMU_COMMIT_MESSAGE=xxx \
-  jianmudev/jianmu-runner-git:${version} \
-  /usr/local/bin/push.sh
-```
-
+  -e JIANMU_GIT_PATH=xxx \
+  jianmurunner/git_log:${version} \
+  /usr/local/bin/log.sh
