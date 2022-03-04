@@ -22,10 +22,12 @@ for log in logs:
         "commitExplain": logList[6]
     }
     resultList.append(logDict)
+
+print(json.dumps(resultList, sort_keys=True, indent=4, separators=(',', ':'), ensure_ascii=False))
+
 json_data = json.dumps(resultList, ensure_ascii=False)
-logs = {'git_log': json_data}
+logs = {'log': json_data}
 result = json.dumps(logs, ensure_ascii=False)
-print(result)
 
 # 生成结果
 resultFile = open('/tmp/resultFile', 'w', encoding='utf-8')
