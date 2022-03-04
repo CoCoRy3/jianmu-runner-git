@@ -23,7 +23,7 @@ for log in logs:
     }
     resultList.append(logDict)
 json_data = json.dumps(resultList, ensure_ascii=False)
-logs = {'log': json_data}
+logs = {'git_log': json_data}
 result = json.dumps(logs, ensure_ascii=False)
 print(result)
 
