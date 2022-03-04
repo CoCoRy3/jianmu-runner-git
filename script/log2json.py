@@ -26,7 +26,7 @@ for log in logs:
 print(json.dumps(resultList, sort_keys=True, indent=4, separators=(',', ':'), ensure_ascii=False))
 
 json_data = json.dumps(resultList, ensure_ascii=False)
-logs = {'log': json_data}
+logs = {'git_log': json_data}
 result = json.dumps(logs, ensure_ascii=False)
 
 # 生成结果
