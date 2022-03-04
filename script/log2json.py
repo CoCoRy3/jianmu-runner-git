@@ -1,7 +1,10 @@
 import json
 import datetime
+import os
 
-f = open('log', 'r', encoding="utf-8")
+path = os.getenv("JIANMU_GIT_PATH")
+
+f = open(f'{path}/log', 'r', encoding="utf-8")
 resultList = []
 std_transfer = '%a %b %d %H:%M:%S %Y %z'
 logs = f.readlines()
