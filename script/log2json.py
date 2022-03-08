@@ -1,14 +1,18 @@
-import json
 import datetime
+import json
 import os
 
 path = os.getenv("JIANMU_GIT_PATH")
+commit_num = os.getenv("JIANMU_COMMIT_NUM")
 
 f = open(f'{path}/log', 'r', encoding="utf-8")
 resultList = []
 std_transfer = '%a %b %d %H:%M:%S %Y %z'
 logs = f.readlines()
+
+frequency = 0
 for log in logs:
+    frequency += 1
     logList = log.split(" 「……」 ")
     std_create_time = datetime.datetime.strptime(logList[5], std_transfer)
     time = (std_create_time + datetime.timedelta(hours=-8)).strftime('%Y-%m-%dT%H.%M.%S')
@@ -22,6 +26,8 @@ for log in logs:
         "commitExplain": logList[6]
     }
     resultList.append(logDict)
+    if frequency == commit_num:
+        break
 
 print(json.dumps(resultList, sort_keys=True, indent=4, separators=(',', ':'), ensure_ascii=False))
 

@@ -8,6 +8,11 @@ inputParameters:
     type: STRING
     description: 通过git管理的项目地址
     required: true
+  - name: commit次数
+    ref: commit_num
+    type: NUMBER
+    description: 取前几次的git log
+    required: true
 outputParameters:
   - ref: git_log
     name: git信息

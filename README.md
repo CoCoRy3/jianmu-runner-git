@@ -34,5 +34,6 @@ docker push jianmurunner/git_log:${version}
 # use username password
 docker run --rm \
   -e JIANMU_GIT_PATH=xxx \
+  -e JIANMU_COMMIT_NUM=xxx \
   jianmurunner/git_log:${version} \
   /usr/local/bin/log.sh
