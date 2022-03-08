@@ -11,7 +11,7 @@ inputParameters:
   - name: commit次数
     ref: commit_num
     type: NUMBER
-    description: 取前几次的git log
+    description: 取前几次commit的git log
     required: true
 outputParameters:
   - ref: git_log
