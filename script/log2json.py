@@ -5,6 +5,8 @@ import os
 path = os.getenv("JIANMU_GIT_PATH")
 commit_num = os.getenv("JIANMU_COMMIT_NUM")
 
+print(commit_num)
+
 f = open(f'{path}/log', 'r', encoding="utf-8")
 resultList = []
 std_transfer = '%a %b %d %H:%M:%S %Y %z'
